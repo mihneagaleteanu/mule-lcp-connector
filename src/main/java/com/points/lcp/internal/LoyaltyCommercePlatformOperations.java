@@ -25,7 +25,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCP(request, "mvs");
 		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
+			logger.error("Error while executing LCP operation",e);
 			return null;
 		}
 	}
@@ -37,7 +37,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCPGet(fullUrl);
 		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
+			logger.error("Error while executing LCP operation",e);
 			return null;
 		}
 	}
@@ -54,7 +54,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCP(request, "debit-order");
 		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
+			logger.error("Error while executing LCP operation",e);
 			return null;
 		}
 	}
@@ -67,7 +67,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCP(request, "credit-order");
 		} catch (Exception e) {
-			logger.error(e.getLocalizedMessage());
+			logger.error("Error while executing LCP operation",e);
 			return null;
 		}
 	}
