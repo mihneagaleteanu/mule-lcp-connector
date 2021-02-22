@@ -1,12 +1,9 @@
 # Loyalty Commerce Platform Extension
 
-Add description ...
+Add description 
 
-
-...
-
-
-...
+1. Follow instructions here https://dzone.com/articles/mulesoft-custom-connector-using-mule-sdk-for-mule
+2. Certification instructions here https://docs.mulesoft.com/mule-sdk/1.1/getting-started
 
 
 Add this dependency to your application pom.xml
