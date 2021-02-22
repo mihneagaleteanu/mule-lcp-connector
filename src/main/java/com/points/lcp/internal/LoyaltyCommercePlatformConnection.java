@@ -110,7 +110,7 @@ public final class LoyaltyCommercePlatformConnection {
 		Mac sha1_HMAC = Mac.getInstance("HmacSHA1");
 		SecretKeySpec secret_key = new SecretKeySpec(Base64.decodeBase64(macKey.getBytes()), "HmacSHA1");
 		sha1_HMAC.init(secret_key);
-		String mac = new String(Base64.encodeBase64(sha1_HMAC.doFinal(normalizedRequestString.getBytes(Charset.forName("UTF-8")))));
+		String mac = new String(Base64.encodeBase64(sha1_HMAC.doFinal(normalizedRequestString.getBytes(Charset.forName("UTF-8")))), Charset.forName("UTF-8"));
 
 		// Step 8: Build Authorization header
 		StringBuffer authorizationHeader = new StringBuffer("MAC ");
