@@ -2,7 +2,6 @@ package com.points.lcp.internal;
 
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Random;
 
@@ -109,9 +108,9 @@ public final class LoyaltyCommercePlatformConnection {
 			macKey += "===".substring(0, 4 - (macKey.length() % 4));
 		}
 		Mac sha1_HMAC = Mac.getInstance("HmacSHA1");
-		SecretKeySpec secret_key = new SecretKeySpec(Base64.decodeBase64(macKey.getBytes()), "HmacSHA1");
+		SecretKeySpec secret_key = new SecretKeySpec(Base64.decodeBase64(macKey.getBytes(Charset.forName("UTF-8"))), "HmacSHA1");
 		sha1_HMAC.init(secret_key);
-		String mac = new String(Base64.encodeBase64(sha1_HMAC.doFinal(normalizedRequestString.getBytes(StandardCharsets.UTF_8))), Charset.forName("UTF-8"));
+		String mac = new String(Base64.encodeBase64(sha1_HMAC.doFinal(normalizedRequestString.getBytes(Charset.forName("UTF-8")))), Charset.forName("UTF-8"));
 
 		// Step 8: Build Authorization header
 		StringBuffer authorizationHeader = new StringBuffer("MAC ");

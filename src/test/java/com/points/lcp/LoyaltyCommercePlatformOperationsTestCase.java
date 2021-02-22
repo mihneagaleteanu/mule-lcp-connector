@@ -36,7 +36,7 @@ public class LoyaltyCommercePlatformOperationsTestCase extends MuleArtifactFunct
 	}
 	
 	@Test
-	public void executDebitMemberAccountOperation() throws Exception {
+	public void executeDebitMemberAccountOperation() throws Exception {
 		String payloadValue = ((String) flowRunner("debitMemberAccountFlow").run().getMessage().getPayload().getValue());
 		assertThat(payloadValue, is("complete"));
 	}
