@@ -4,12 +4,17 @@ import org.mule.runtime.extension.api.annotation.param.Config;
 import org.mule.runtime.extension.api.annotation.param.Connection;
 import org.mule.runtime.extension.api.annotation.param.MediaType;
 import org.mule.runtime.extension.api.annotation.param.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is a container for operations, every public method in this class
  * will be taken as an extension operation.
  */
 public class LoyaltyCommercePlatformOperations {
+	
+	private static final Logger logger = LoggerFactory.getLogger(LoyaltyCommercePlatformOperations.class);
+
 
 	@MediaType(value = MediaType.APPLICATION_JSON, strict = false)
 	public String validateMemberAccount(@Config LoyaltyCommercePlatformConfiguration configuration, String memberId,
@@ -20,8 +25,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCP(request, "mvs");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getLocalizedMessage());
 			return null;
 		}
 	}
@@ -33,8 +37,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCPGet(fullUrl);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getLocalizedMessage());
 			return null;
 		}
 	}
@@ -51,8 +54,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCP(request, "debit-order");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getLocalizedMessage());
 			return null;
 		}
 	}
@@ -65,8 +67,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCP(request, "credit-order");
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getLocalizedMessage());
 			return null;
 		}
 	}

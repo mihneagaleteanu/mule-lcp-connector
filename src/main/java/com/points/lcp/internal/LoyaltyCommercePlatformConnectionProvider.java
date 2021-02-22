@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 public class LoyaltyCommercePlatformConnectionProvider
 		implements PoolingConnectionProvider<LoyaltyCommercePlatformConnection> {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(LoyaltyCommercePlatformConnectionProvider.class);
+	private static final Logger logger = LoggerFactory.getLogger(LoyaltyCommercePlatformConnectionProvider.class);
 
 	private final HttpClient httpClient = HttpClients.createDefault();
 
@@ -70,7 +70,7 @@ public class LoyaltyCommercePlatformConnectionProvider
 		try {
 			connection.invalidate();
 		} catch (Exception e) {
-			LOGGER.error("Error while disconnecting", e);
+			logger.error("Error while disconnecting", e);
 		}
 	}
 

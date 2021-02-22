@@ -1,6 +1,7 @@
 package com.points.lcp.internal;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Random;
 
@@ -11,8 +12,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
@@ -87,8 +88,9 @@ public final class LoyaltyCommercePlatformConnection {
 
 		// Step 2: Generate nonce
 		byte[] noncebytes = new byte[8];
-		new Random(new Date().getTime()).nextBytes(noncebytes);
-		String nonce = new String(Base64.encodeBase64(noncebytes));
+		Random randomObject = new Random(new Date().getTime());
+		randomObject.nextBytes(noncebytes);
+		String nonce = new String(Base64.encodeBase64(noncebytes), Charset.forName("UTF-8"));
 
 		// Step 3: Generate ext
 		String ext = "";
@@ -108,7 +110,7 @@ public final class LoyaltyCommercePlatformConnection {
 		Mac sha1_HMAC = Mac.getInstance("HmacSHA1");
 		SecretKeySpec secret_key = new SecretKeySpec(Base64.decodeBase64(macKey.getBytes()), "HmacSHA1");
 		sha1_HMAC.init(secret_key);
-		String mac = new String(Base64.encodeBase64(sha1_HMAC.doFinal(normalizedRequestString.getBytes())));
+		String mac = new String(Base64.encodeBase64(sha1_HMAC.doFinal(normalizedRequestString.getBytes(Charset.forName("UTF-8")))));
 
 		// Step 8: Build Authorization header
 		StringBuffer authorizationHeader = new StringBuffer("MAC ");
