@@ -12,20 +12,25 @@ import org.slf4j.LoggerFactory;
  * will be taken as an extension operation.
  */
 public class LoyaltyCommercePlatformOperations {
-	
-	private static final Logger logger = LoggerFactory.getLogger(LoyaltyCommercePlatformOperations.class);
 
+	private static final Logger logger = LoggerFactory.getLogger(LoyaltyCommercePlatformOperations.class);
 
 	@MediaType(value = MediaType.APPLICATION_JSON, strict = false)
 	public String validateMemberAccount(@Config LoyaltyCommercePlatformConfiguration configuration, String memberId,
 			String firstName, String lastName, @Optional String password,
 			@Connection LoyaltyCommercePlatformConnection connection) {
-		String request = "{\"memberId\": \"" + memberId + "\",\"firstName\":\"" + firstName + "\",\"lastName\":\""
+		String identifyingFactors = "{\"memberId\": \"" + memberId + "\",\"firstName\":\"" + firstName + "\",\"lastName\":\""
 				+ lastName + "\"}";
+		String request = null;
+		if (password != null && password.length() > 0) {
+			request = "{\"identifyingFactors\":"+identifyingFactors+",\"authenticatingFactors\":{\"password\":\""+password+"\"}}";
+		} else {
+			request = "{\"identifyingFactors\":"+identifyingFactors+"}";
+		}
 		try {
 			return connection.callLCP(request, "mvs");
 		} catch (Exception e) {
-			logger.error("Error while executing LCP operation",e);
+			logger.error("Error while executing LCP operation", e);
 			return null;
 		}
 	}
@@ -37,7 +42,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCPGet(fullUrl);
 		} catch (Exception e) {
-			logger.error("Error while executing LCP operation",e);
+			logger.error("Error while executing LCP operation", e);
 			return null;
 		}
 	}
@@ -54,7 +59,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCP(request, "debit-order");
 		} catch (Exception e) {
-			logger.error("Error while executing LCP operation",e);
+			logger.error("Error while executing LCP operation", e);
 			return null;
 		}
 	}
@@ -67,7 +72,7 @@ public class LoyaltyCommercePlatformOperations {
 		try {
 			return connection.callLCP(request, "credit-order");
 		} catch (Exception e) {
-			logger.error("Error while executing LCP operation",e);
+			logger.error("Error while executing LCP operation", e);
 			return null;
 		}
 	}

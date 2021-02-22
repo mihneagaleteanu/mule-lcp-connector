@@ -8,8 +8,16 @@
         <loyalty-commerce-platform:connection server="sandbox.lcp.points.com" lpId="43f39a8f-cac9-4957-8480-a83b6093cfe3" macId="6aa481d92276468a9b03aa6044bdb68e" macKey="8DbdQYu6H8X626Shv5oI3ACAD0hRVf0dPuxps84kpaE" />
     </loyalty-commerce-platform:config>
 
-    <flow name="validateMemberFlow">
+    <flow name="validateMemberNoPasswordFlow">
         <loyalty-commerce-platform:validate-member-account config-ref="config" memberId="zX0C" firstName="John" lastName="Smith 1234"/>
+        <set-payload value="#[%dw 2.0
+output application/java
+---
+payload.balance]" />
+    </flow>
+    
+    <flow name="validateMemberWithPasswordFlow">
+        <loyalty-commerce-platform:validate-member-account config-ref="config" memberId="zX0C" firstName="John" lastName="Smith 1234" password="password"/>
         <set-payload value="#[%dw 2.0
 output application/java
 ---

@@ -18,8 +18,14 @@ public class LoyaltyCommercePlatformOperationsTestCase extends MuleArtifactFunct
 	}
 
 	@Test
-	public void executeMemberValidationOperation() throws Exception {
-		Integer payloadValue = ((Integer) flowRunner("validateMemberFlow").run().getMessage().getPayload().getValue());
+	public void executeMemberValidationNoPasswordOperation() throws Exception {
+		Integer payloadValue = ((Integer) flowRunner("validateMemberNoPasswordFlow").run().getMessage().getPayload().getValue());
+		assertThat(payloadValue, is(1234));
+	}
+	
+	@Test
+	public void executeMemberValidationWithPasswordOperation() throws Exception {
+		Integer payloadValue = ((Integer) flowRunner("validateMemberWithPasswordFlow").run().getMessage().getPayload().getValue());
 		assertThat(payloadValue, is(1234));
 	}
 	

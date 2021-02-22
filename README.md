@@ -1,16 +1,21 @@
-# Loyalty Commerce Platform Extension
+## Loyalty Commerce Platform Connector
 
-Add description 
+This connector allows LCP application developers to perform operations against the LCP using MuleSoft.
 
-1. Follow instructions here https://dzone.com/articles/mulesoft-custom-connector-using-mule-sdk-for-mule
-2. Certification instructions here https://docs.mulesoft.com/mule-sdk/1.1/getting-started
+## Author
 
+Points International
 
-Add this dependency to your application pom.xml
+## Supported Mule runtime versions
 
-```
-<groupId>com.points.lcp</groupId>
-<artifactId>mule-lcp-connector</artifactId>
-<version>1.0.0</version>
-<classifier>mule-plugin</classifier>
+Mule 3.6.x+
+
+## Installation and Usage
+
+To learn the features provided by the LCP you can refer to documentation at https://points.github.io/Loyalty-Commerce-Platform/index.html.
+
+## Reporting Issues
+
+You can report new issues at partnerships@points.com
+
 ```
